@@ -50,20 +50,20 @@ class ProductModel {
     dynamic offerUsd;
     dynamic offerMin;
     String? brand;
-    List<Image> images;
-    List<Medium> medium;
-    List<Medium> small;
-    List<dynamic> variations;
-    List<Large> large;
-    List<dynamic> pickup;
+    // List<Image> images;
+    // List<Medium> medium;
+    // List<Medium> small;
+    // List<dynamic> variations;
+    // List<Large> large;
+    // List<dynamic> pickup;
 
     ProductModel({
-      required this.images,
-      required this.medium,
-      required this.small,
-      required this.variations,
-      required this.large,
-      required this.pickup,
+      // required this.images,
+      // required this.medium,
+      // required this.small,
+      // required this.variations,
+      // required this.large,
+      // required this.pickup,
       this.id,
       this.title,
       this.description,
@@ -118,12 +118,9 @@ class ProductModel {
         sku: json["sku"],
         regularPrice: json["regular_price"]?.toDouble(),
         idMarketplaceStoreCategory: json["id_marketplace_store_category"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         status: json["status"],
         idProduct: json["id_product"],
         idDepot: json["id_depot"],
-        medium: List<Medium>.from(json["medium"].map((x) => Medium.fromJson(x))),
-        small: List<Medium>.from(json["small"].map((x) => Medium.fromJson(x))),
         idMarketplaceStoreBrand: IdMarketplaceStoreBrand.fromJson(json["id_marketplace_store_brand"]),
         amenityAdd: json["amenity_add"],
         bookingDetail: json["booking_detail"],
@@ -141,8 +138,6 @@ class ProductModel {
         regularUsd: json["regular_usd"]?.toDouble(),
         taxRate: json["tax_rate"]?.toDouble(),
         print: json["print"],
-        variations: List<dynamic>.from(json["variations"].map((x) => x)),
-        large: List<Large>.from(json["large"].map((x) => Large.fromJson(x))),
         image: Image.fromJson(json["image"]),
         variation: json["variation"],
         size: json["size"],
@@ -150,7 +145,6 @@ class ProductModel {
         color2: json["color2"],
         model: json["model"],
         reviewsAverage: json["reviews_average"],
-        pickup: List<dynamic>.from(json["pickup"].map((x) => x)),
         checkPickup: json["check_pickup"],
         hasVariation: json["has_variation"],
         hash: json["hash"],
@@ -163,6 +157,12 @@ class ProductModel {
         offerUsd: json["offer_usd"],
         offerMin: json["offer_min"],
         brand: json["brand"],
+        // images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        // medium: List<Medium>.from(json["medium"].map((x) => Medium.fromJson(x))),
+        // small: List<Medium>.from(json["small"].map((x) => Medium.fromJson(x))),
+        // variations: List<dynamic>.from(json["variations"].map((x) => x)),
+        // large: List<Large>.from(json["large"].map((x) => Large.fromJson(x))),
+        // pickup: List<dynamic>.from(json["pickup"].map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
@@ -172,12 +172,9 @@ class ProductModel {
         "sku": sku,
         "regular_price": regularPrice,
         "id_marketplace_store_category": idMarketplaceStoreCategory,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "status": status,
         "id_product": idProduct,
         "id_depot": idDepot,
-        "medium": List<dynamic>.from(medium.map((x) => x.toJson())),
-        "small": List<dynamic>.from(small.map((x) => x.toJson())),
         "id_marketplace_store_brand": idMarketplaceStoreBrand?.toJson(),
         "amenity_add": amenityAdd,
         "booking_detail": bookingDetail,
@@ -195,8 +192,6 @@ class ProductModel {
         "regular_usd": regularUsd,
         "tax_rate": taxRate,
         "print": print,
-        "variations": List<dynamic>.from(variations.map((x) => x)),
-        "large": List<dynamic>.from(large.map((x) => x.toJson())),
         "image": image?.toJson(),
         "variation": variation,
         "size": size,
@@ -204,7 +199,6 @@ class ProductModel {
         "color2": color2,
         "model": model,
         "reviews_average": reviewsAverage,
-        "pickup": List<dynamic>.from(pickup.map((x) => x)),
         "check_pickup": checkPickup,
         "has_variation": hasVariation,
         "hash": hash,
@@ -217,6 +211,12 @@ class ProductModel {
         "offer_usd": offerUsd,
         "offer_min": offerMin,
         "brand": brand,
+        // "small": List<dynamic>.from(small.map((x) => x.toJson())),
+        // "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        // "medium": List<dynamic>.from(medium.map((x) => x.toJson())),
+        // "variations": List<dynamic>.from(variations.map((x) => x)),
+        // "large": List<dynamic>.from(large.map((x) => x.toJson())),
+        // "pickup": List<dynamic>.from(pickup.map((x) => x)),
     };
 }
 
