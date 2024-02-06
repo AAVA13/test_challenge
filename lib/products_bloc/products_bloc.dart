@@ -6,8 +6,14 @@ part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc() : super(ProductsInitial()) {
-    on<ProductsEvent>((event, emit) {
-      // TODO: implement event handler
+    on<ProductsEvent>((event, emit) {});
+
+    on<LoadProducts>((event, emit) async {
+      emit(ProductsLoading());
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      emit(ProductsLoaded());
     });
   }
 }
