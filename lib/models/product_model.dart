@@ -31,7 +31,7 @@ class ProductModel {
     double? regularUsd;
     double? taxRate;
     bool? print;
-    Image? image;
+    Img? image;
     bool? variation;
     bool? size;
     bool? color1;
@@ -50,17 +50,17 @@ class ProductModel {
     dynamic offerUsd;
     dynamic offerMin;
     String? brand;
-    // List<Image> images;
-    // List<Medium> medium;
-    // List<Medium> small;
+    List<Img> images;
+    List<Medium> small;
+    List<Medium> medium;
     // List<dynamic> variations;
     // List<Large> large;
     // List<dynamic> pickup;
 
     ProductModel({
-      // required this.images,
-      // required this.medium,
-      // required this.small,
+      required this.images,
+      required this.small,
+      required this.medium,
       // required this.variations,
       // required this.large,
       // required this.pickup,
@@ -138,7 +138,7 @@ class ProductModel {
         regularUsd: json["regular_usd"]?.toDouble(),
         taxRate: json["tax_rate"]?.toDouble(),
         print: json["print"],
-        image: Image.fromJson(json["image"]),
+        image: Img.fromJson(json["image"]),
         variation: json["variation"],
         size: json["size"],
         color1: json["color1"],
@@ -157,9 +157,9 @@ class ProductModel {
         offerUsd: json["offer_usd"],
         offerMin: json["offer_min"],
         brand: json["brand"],
-        // images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        // medium: List<Medium>.from(json["medium"].map((x) => Medium.fromJson(x))),
-        // small: List<Medium>.from(json["small"].map((x) => Medium.fromJson(x))),
+        images: List<Img>.from(json["images"].map((x) => Img.fromJson(x))),
+        small: List<Medium>.from(json["small"].map((x) => Medium.fromJson(x))),
+        medium: List<Medium>.from(json["medium"].map((x) => Medium.fromJson(x))),
         // variations: List<dynamic>.from(json["variations"].map((x) => x)),
         // large: List<Large>.from(json["large"].map((x) => Large.fromJson(x))),
         // pickup: List<dynamic>.from(json["pickup"].map((x) => x)),
@@ -211,9 +211,9 @@ class ProductModel {
         "offer_usd": offerUsd,
         "offer_min": offerMin,
         "brand": brand,
-        // "small": List<dynamic>.from(small.map((x) => x.toJson())),
-        // "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        // "medium": List<dynamic>.from(medium.map((x) => x.toJson())),
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "small": List<dynamic>.from(small.map((x) => x.toJson())),
+        "medium": List<dynamic>.from(medium.map((x) => x.toJson())),
         // "variations": List<dynamic>.from(variations.map((x) => x)),
         // "large": List<dynamic>.from(large.map((x) => x.toJson())),
         // "pickup": List<dynamic>.from(pickup.map((x) => x)),
@@ -236,7 +236,7 @@ class IdMarketplaceStoreBrand {
     };
 }
 
-class Image {
+class Img {
     IdMarketplaceStoreBrand id;
     String name;
     String image;
@@ -244,7 +244,7 @@ class Image {
     String mime;
     int idProduct;
 
-    Image({
+    Img({
         required this.id,
         required this.name,
         required this.image,
@@ -253,7 +253,7 @@ class Image {
         required this.idProduct,
     });
 
-    factory Image.fromJson(Map<String, dynamic> json) => Image(
+    factory Img.fromJson(Map<String, dynamic> json) => Img(
         id: IdMarketplaceStoreBrand.fromJson(json["_id"]),
         name: json["name"],
         image: json["image"],

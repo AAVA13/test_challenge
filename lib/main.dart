@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_challenge/home_page.dart';
+import 'package:test_challenge/home/page/home_page.dart';
 import 'package:test_challenge/products_bloc/products_bloc.dart';
 
 void main() => runApp(const MyApp());

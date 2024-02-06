@@ -15,8 +15,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       //await Future.delayed(const Duration(seconds: 2));
       List<ProductModel> products = await ProductsApiImpl().getProducts();
 
-
       emit(ProductsLoaded(products));
+
+
     });
   }
 }
