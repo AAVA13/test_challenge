@@ -1,23 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:test_challenge/api/product/product_detail_page.dart';
 import 'package:test_challenge/models/product_model.dart';
 import 'package:test_challenge/utils/double_formater.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductDetailPage extends StatelessWidget {
   final ProductModel product;
-  const ProductCard({super.key,required this.product});
+  const ProductDetailPage({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          ProductDetailPage(product: product)
-        ));
-      },
-      child: Container(
-        padding: const EdgeInsets.all(8),
+    return Scaffold(
+      body: Container(
+      padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
