@@ -1,20 +1,26 @@
 name: test_challenge
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
+  badges: ^2.0.2
   bloc: ^8.1.2
   flutter:
     sdk: flutter
+  http: ^1.2.0
+  sqflite: ^2.0.2+1
+  path_provider: ^2.1.2
+  shared_preferences: ^2.0.15
+  provider: ^6.1.1
+  refresh_loadmore: ^2.0.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
 flutter:
   uses-material-design: true
