@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_challenge/constants/color.dart';
-import 'package:test_challenge/screens/product_details.dart';
+import 'package:test_challenge/features/product_details.dart';
 
 import 'package:provider/provider.dart';
 import 'package:test_challenge/provider/cart_provider.dart';

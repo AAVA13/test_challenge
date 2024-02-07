@@ -3,7 +3,7 @@ import "package:test_challenge/constants/color.dart";
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import 'package:test_challenge/provider/cart_provider.dart';
-import 'package:test_challenge/screens/cart.dart';
+import 'package:test_challenge/features/cart.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({

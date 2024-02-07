@@ -1,4 +1,4 @@
-class ProductsData {
+class Products {
   final String id;
   final String title;
   final String? description;
@@ -12,7 +12,7 @@ class ProductsData {
   final double stock;
   final String brand;
 
-  const ProductsData(
+  const Products(
       {required this.id,
       required this.title,
       this.description,
@@ -26,8 +26,8 @@ class ProductsData {
       required this.brand,
       required this.stock});
 
-  factory ProductsData.fromJson(Map<String, dynamic> product) {
-    return ProductsData(
+  factory Products.fromJson(Map<String, dynamic> product) {
+    return Products(
         id: product['_id'],
         title: product['title'],
         description: product['description'],

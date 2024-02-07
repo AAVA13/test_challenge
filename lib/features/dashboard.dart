@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:refresh_loadmore/refresh_loadmore.dart';
 import 'package:test_challenge/constants/color.dart';
-import 'package:test_challenge/shared/custom_text_field.dart';
-import 'package:test_challenge/data/http_helper.dart';
-import 'package:test_challenge/data/products_data.dart';
-import 'package:test_challenge/shared/item_list.dart';
+import 'package:test_challenge/common/custom_text_field.dart';
+import 'package:test_challenge/services/http_helper.dart';
+import 'package:test_challenge/model/products_model.dart';
+import 'package:test_challenge/common/item_list.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   bool isLastPage = false;
   bool loading = true;
-  late List<ProductsData> futureProducts;
+  late List<Products> futureProducts;
   HTTPHelper httpHelper = HTTPHelper();
   final TextEditingController searchText = TextEditingController();
   @override
@@ -52,7 +52,7 @@ class _DashboardState extends State<Dashboard> {
   Future<void> filterProduct(TextEditingController textControl) async {
     String name = textControl.text;
     await Future.delayed(const Duration(seconds: 1), () async {
-      List<ProductsData> data;
+      List<Products> data;
       if (name != "") {
         loading = true;
         data = futureProducts

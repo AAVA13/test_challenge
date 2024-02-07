@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_challenge/constants/color.dart';
 import 'package:test_challenge/provider/cart_provider.dart';
-import 'package:test_challenge/screens/dashboard.dart';
-import 'package:test_challenge/shared/navbar.dart';
+import 'package:test_challenge/features/dashboard.dart';
+import 'package:test_challenge/common/navbar.dart';
 
 void main() {
   runApp(const MainApp());

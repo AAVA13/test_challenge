@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_challenge/constants/color.dart';
-import 'package:test_challenge/shared/navbar.dart';
+import 'package:test_challenge/common/navbar.dart';
 
 class Details extends StatelessWidget {
   final String imageUrl;

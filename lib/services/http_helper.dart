@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:test_challenge/data/products_data.dart';
+import 'package:test_challenge/model/products_model.dart';
 
 class HTTPHelper {
   // 'https://ds.deepcompany.com/marketplace/product-demo?page=1'
@@ -11,11 +11,11 @@ class HTTPHelper {
   final String xAPIKey =
       'rIH99Wc_HcMlonQTugzKySx5J31O2XgFJsLVJS8m9tF-Zyr01SfiwmvQZFVuqErM8soJeGV-RCgdSMXpT_25wg';
 
-  Future<List<ProductsData>> getProducts(bool firstPage) async {
+  Future<List<Products>> getProducts(bool firstPage) async {
     int i;
     int page = 1;
     int count = 20;
-    List<ProductsData> products = [];
+    List<Products> products = [];
 
     if (firstPage) {
       page = 1;
@@ -35,7 +35,7 @@ class HTTPHelper {
         final results = responseBody['results'];
 
         for (final result in results) {
-          products.add(ProductsData.fromJson(result));
+          products.add(Products.fromJson(result));
         }
       } else {
         throw Exception('Failed to load products');

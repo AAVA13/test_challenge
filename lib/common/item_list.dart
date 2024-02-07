@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_challenge/database/db_helper.dart';
-import 'package:test_challenge/shared/item_card.dart';
+import 'package:test_challenge/common/item_card.dart';
 
 class ItemList extends StatefulWidget {
   final List<dynamic> items;
