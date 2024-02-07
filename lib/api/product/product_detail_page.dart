@@ -10,60 +10,127 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-      padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(1, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      floatingActionButton: Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            CarouselSlider(
-              items: product.images.map((e) =>
-                Hero(
-                  tag:e,
-                  child: Image.network(e.image,fit: BoxFit.cover,)
-                )
-              ).toList(),
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                aspectRatio: 1 / 1,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 3),
-                enlargeCenterPage: true,
-                scrollDirection: Axis.horizontal,
+
+            Expanded(
+              child: IconButton(
+                icon: const Icon(Icons.favorite_border),
+                onPressed: (){}, 
               ),
             ),
-            Text(
-              "\$${DoubleFormater().validateDouble(product.regularUsd)}",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 20,
-                fontWeight: FontWeight.w900,
+
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: RawMaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20
+                ),
+                fillColor: Colors.amber,
+                child: Text(
+                  'Agregar al carrito',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                onPressed: (){
+                  
+                }
               ),
-            ),
-            Text(
-              "${product.brand}",maxLines: 1,
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-            Text(
-              "${product.title}",maxLines: 2,
-              style: TextStyle(
-                fontSize: 18
-              ),
-            ),
+            )
           ],
         ),
+      ),
+      body: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(
+          parent: BouncingScrollPhysics()
+        ),
+        slivers: [
+
+          SliverToBoxAdapter(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(30)
+                ),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 18,
+                    offset: const Offset(1, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  CarouselSlider(
+                    items: product.images.map((e) =>
+                      Hero(
+                        tag:e,
+                        child: Image.network(e.image,fit: BoxFit.cover,)
+                      )
+                    ).toList(),
+                    options: CarouselOptions(
+                      enableInfiniteScroll: false,
+                      aspectRatio: 1 / 1,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 8),
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                      autoPlayAnimationDuration: const Duration(seconds: 2)
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.grey[800]
+                  ),
+                  children: [
+                    
+                    TextSpan(
+                      text: '${product.title}\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      )
+                    ),
+
+                    TextSpan(
+                      text: '${product.brand}',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16,
+                      )
+                    ),
+              
+                  ]
+                ),
+              ),
+            ),
+          ),
+          
+          
+
+        ],
       ),
     );
   }
