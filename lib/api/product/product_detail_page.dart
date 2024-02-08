@@ -3,9 +3,38 @@ import 'package:flutter/material.dart';
 import 'package:test_challenge/models/product_model.dart';
 import 'package:test_challenge/utils/double_formater.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
   const ProductDetailPage({super.key, required this.product});
+
+  @override
+  State<ProductDetailPage> createState() => _ProductDetailPageState();
+}
+
+class _ProductDetailPageState extends State<ProductDetailPage> {
+
+  late int _counter;
+
+  @override
+  void initState() {
+    _counter = 1;
+    super.initState();
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      if(_counter > 1){
+        _counter--;
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +48,7 @@ class ProductDetailPage extends StatelessWidget {
             Expanded(
               child: IconButton(
                 icon: const Icon(Icons.favorite_border),
-                onPressed: (){}, 
+                onPressed: (){},
               ),
             ),
 
@@ -27,13 +56,13 @@ class ProductDetailPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.75,
               child: RawMaterialButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
+                  borderRadius: BorderRadius.circular(40)
                 ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10
                 ),
                 fillColor: Colors.amber,
-                child: Text(
+                child: const Text(
                   'Agregar al carrito',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -44,7 +73,8 @@ class ProductDetailPage extends StatelessWidget {
                   
                 }
               ),
-            )
+            ),
+
           ],
         ),
       ),
@@ -54,48 +84,37 @@ class ProductDetailPage extends StatelessWidget {
         ),
         slivers: [
 
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(30)
+          SliverAppBar(
+            automaticallyImplyLeading: true,
+            pinned: false,
+            floating: false,
+            expandedHeight: 280,
+            flexibleSpace: FlexibleSpaceBar(
+              stretchModes: const [
+                StretchMode.zoomBackground,
+                StretchMode.blurBackground,
+                StretchMode.fadeTitle,
+              ],
+              background: CarouselSlider(
+                items: widget.product.images.map((e) =>
+                  Hero(
+                    tag:e,
+                    child: Image.network(e.image,fit: BoxFit.cover,)
+                  )
+                ).toList(),
+                options: CarouselOptions(
+                  enableInfiniteScroll: false,
+                  aspectRatio: 1 / 1,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 8),
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                  autoPlayAnimationDuration: const Duration(seconds: 2)
                 ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 18,
-                    offset: const Offset(1, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CarouselSlider(
-                    items: product.images.map((e) =>
-                      Hero(
-                        tag:e,
-                        child: Image.network(e.image,fit: BoxFit.cover,)
-                      )
-                    ).toList(),
-                    options: CarouselOptions(
-                      enableInfiniteScroll: false,
-                      aspectRatio: 1 / 1,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 8),
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                      autoPlayAnimationDuration: const Duration(seconds: 2)
-                    ),
-                  ),
-                ],
               ),
             ),
           ),
 
-          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(18.0),
@@ -107,16 +126,16 @@ class ProductDetailPage extends StatelessWidget {
                   children: [
                     
                     TextSpan(
-                      text: '${product.title}\n',
-                      style: TextStyle(
+                      text: '${widget.product.title}\n',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       )
                     ),
 
                     TextSpan(
-                      text: '${product.brand}',
-                      style: TextStyle(
+                      text: '${widget.product.brand}',
+                      style: const TextStyle(
                         fontStyle: FontStyle.italic,
                         fontSize: 16,
                       )
@@ -127,8 +146,123 @@ class ProductDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          
-          
+
+          SliverFillRemaining(
+            fillOverscroll: false,
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                  
+                        widget.product.description != null? TextSpan(
+                          children: [
+                            const TextSpan(
+                              text: 'Acerca del producto\n',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '${widget.product.description}',
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 16,
+                              ),
+                            ),
+                          ]
+                        ) : const TextSpan(),
+
+
+
+                      ]
+                    ),
+                  ),
+
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                        padding: EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.remove),
+                              onPressed: _decrementCounter,
+                            ),
+                            Container(
+                              width: 90,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                keyboardType: TextInputType.number,
+                                controller: TextEditingController(text: '$_counter'),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _counter = int.tryParse(value) ?? 1;
+                                  });
+                                },
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: _incrementCounter,
+                            ),
+                          ],
+                        ),
+                      ),
+                      ),
+                      RichText(
+                        textAlign: TextAlign.end,
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[800],
+                            fontSize: 28,
+                          ),
+                          text: '\$${DoubleFormater().validateDouble(widget.product.regularUsd)}\n',
+                          children: [
+                            TextSpan(
+                              text: '${DoubleFormater().validateDouble(widget.product.regularPrice)}',
+                              style: TextStyle(
+                                color: Colors.grey[400],
+                                fontSize: 16
+                              )
+                            ),
+                          ]
+                        )
+                      ),
+                    ],
+                  )
+
+                ],
+              )
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0
+              ),
+              child: Text(
+                widget.product.description??"",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
 
         ],
       ),

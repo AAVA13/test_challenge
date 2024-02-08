@@ -6,16 +6,16 @@ part 'products_event.dart';
 part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
-  ProductsBloc() : super(ProductsInitial()) {
+  ProductsBloc() : super(ProductsInitial(1)) {
     on<ProductsEvent>((event, emit) {});
 
     on<LoadProducts>((event, emit) async {
-      emit(ProductsLoading());
-
+      emit(ProductsLoading(1));
+      
       //await Future.delayed(const Duration(seconds: 2));
-      List<ProductModel> products = await ProductsApiImpl().getProducts();
+      List<ProductModel> products = await ProductsApiImpl().getProducts(event.index);
 
-      emit(ProductsLoaded(products));
+      emit(ProductsLoaded(products,1));
 
 
     });

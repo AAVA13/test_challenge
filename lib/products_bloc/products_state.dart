@@ -1,14 +1,24 @@
 part of 'products_bloc.dart';
 
-sealed class ProductsState {}
+sealed class ProductsState {
+  final int page;
 
-final class ProductsInitial extends ProductsState {}
+  ProductsState(this.page);
+}
 
-final class ProductsLoading extends ProductsState {}
+final class ProductsInitial extends ProductsState {
+  ProductsInitial(super.page);
+}
+
+final class ProductsLoading extends ProductsState {
+  ProductsLoading(super.page);
+}
 
 final class ProductsLoaded extends ProductsState {
   final List<ProductModel> productModel;
-  ProductsLoaded(this.productModel);
+  ProductsLoaded(this.productModel,super.page);
 }
 
-final class ProductsError extends ProductsState {}
+final class ProductsError extends ProductsState {
+  ProductsError(super.page);
+}

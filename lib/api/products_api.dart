@@ -6,16 +6,16 @@ import 'package:http/http.dart' as http;
 
 abstract class ProductsApi {
 
-  Future<List<ProductModel>> getProducts();
+  Future<List<ProductModel>> getProducts(int index);
   
 }
 
 class ProductsApiImpl implements ProductsApi{
   
   @override
-  Future<List<ProductModel>> getProducts() async {
+  Future<List<ProductModel>> getProducts(int index) async {
     
-    Uri url = Uri.parse('https://ds.deepcompany.com/marketplace/product-demo?page=1');
+    Uri url = Uri.parse('https://ds.deepcompany.com/marketplace/product-demo?page=$index');
   
     http.Response response = await http.get(
       url,

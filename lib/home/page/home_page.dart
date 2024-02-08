@@ -9,9 +9,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Row(
+        children: [
+
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<ProductsBloc>().add(LoadProducts());
+          context.read<ProductsBloc>().add(LoadProducts(index:10));
         },
         child: BlocBuilder<ProductsBloc, ProductsState>(
           builder: (context, state) {
@@ -25,6 +30,29 @@ class HomePage extends StatelessWidget {
             if(state is ProductsLoaded){
               return CustomScrollView(
                 slivers: [
+                    
+                  SliverAppBar(
+                    floating: true,
+                    collapsedHeight: 70,
+                    expandedHeight: 70,
+                    flexibleSpace: FlexibleSpaceBar(
+                      expandedTitleScale: 20,
+                      background: SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Buscar',
+                              prefixIcon: Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   SliverGrid(
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 250,
@@ -37,6 +65,10 @@ class HomePage extends StatelessWidget {
                         ProductCard(product: product)).toList()
                     ),
                   ),
+
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 100),
+                  )
                 ],
               );
             }
