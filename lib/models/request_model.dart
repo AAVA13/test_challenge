@@ -6,18 +6,18 @@ import 'dart:convert';
 
 import 'package:test_challenge/models/product_model.dart';
 
-Request requestFromJson(String str) => Request.fromJson(json.decode(str));
+RequestModel requestFromJson(String str) => RequestModel.fromJson(json.decode(str));
 
-String requestToJson(Request data) => json.encode(data.toJson());
+String requestToJson(RequestModel data) => json.encode(data.toJson());
 
-class Request {
+class RequestModel {
     List<ProductModel> products;
     int pages;
     int records;
     int current;
     String filter;
 
-    Request({
+    RequestModel({
         required this.products,
         required this.pages,
         required this.records,
@@ -25,8 +25,8 @@ class Request {
         required this.filter,
     });
 
-    factory Request.fromJson(Map<String, dynamic> json) => Request(
-        products: List<ProductModel>.from(json["results"].map((x) => x)),
+    factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
+        products: List<ProductModel>.from(json["results"].map((x) => ProductModel.fromJson(x))),
         pages: json["pages"],
         records: json["records"],
         current: json["current"],
